@@ -53,3 +53,9 @@ plot(df$room_num, df$price,
      xlab = "Room Number", ylab = "Price", 
      pch = 19, col = "darkblue")
 abline(final_model, col = "red", lwd = 2)
+
+# remove all columns with zero variance automatically
+df <- df[, sapply(df, function(x) length(unique(x)) > 1)]
+
+multiple_model <- lm(price ~ ., data = df)
+summary(multiple_model)
