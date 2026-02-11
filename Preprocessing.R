@@ -1,10 +1,10 @@
-df <- read.csv("/Users/malvernbright/Desktop/ML/House_Price_Data_Dirty.csv", header = TRUE )
+df <- read.csv("/home/malve/development/MLAI/machine-learning-python-r/House_Price.csv", header = TRUE )
 str(df)
 
 summary(df)
 
-hist(df$crime_rate)
-pairs(~price+crime_rate+n_hot_rooms+rainfall, data = df)
+hist(df$crime_rate) # Histogram
+pairs(~price+crime_rate+n_hot_rooms+rainfall, data = df) # Scatter plot
 barplot(table(df$airport))
 barplot(table(df$bus_ter))
 barplot(table(df$waterbody))
