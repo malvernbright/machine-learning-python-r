@@ -1,4 +1,4 @@
-df <- read.csv("/home/malve/development/MLAI/machine-learning-python-r/House_Price.csv", header = TRUE )
+df <- read.csv("House_Price.csv", header = TRUE )
 str(df)
 
 summary(df)
@@ -59,40 +59,5 @@ rm(df2)
 rm(df3)
 df <- df[,-14]
 
-df3 <- dummy(df, object = NULL)
-df[names(df3)] <- df3
-df <- df[,-16]
-df <- df[,-19]
-df <- df[,-12]
-df <- df[,-9]
-
-numeric_df <- df[sapply(df, is.numeric)]
-round(cor(numeric_df, use = "complete.obs"), 3)
-df <- df[, -4]
-df <- df[, -11]
-round(cor(numeric_df, use = "complete.obs"), 3)
-summary(df)
-
-# LinearRegression
-simple_model <- lm(price~room_num, data = df)
-summary(simple_model)
-plot(df$room_num,df$price)
-abline(simple_model)
-
-summary(df$room_num)
-summary(df$price)
-str(df)
-df$log_price <- log(df$price + 1)
-log_model <- lm(log_price ~ room_num, data = df)
-summary(log_model)
-plot(df$room_num, df$log_price, main = "Log(Price) vs Room Num", abline(log_model, col = "red"))
-plot(df$crime_rate, df$price)
-df$crime_rate <- log(df$crime_rate + 1)
-plot(df$n_hos_beds, df$price)
-boxplot(df$price, main = "Price Outliers")
-df_clean <- subset(df, price < 110)
-df_clean$log_price <- log(df_clean$price + 1)
-clean_model <- lm(price ~ room_num, data = df_clean)
-summary(clean_model)
-plot(df_clean$room_num, df_clean$price, main = "Cleaned Data Linear Fit", abline(clean_model, col = "blue"))
-
+#df <- dummy_cols(df, select_columns = c("airport", "waterbody"))
+df <- dummy_cols(df, select_columns = c("airport", "waterbody"), remove_selected_columns = TRUE)
