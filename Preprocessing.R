@@ -61,3 +61,9 @@ df <- df[,-14]
 
 #df <- dummy_cols(df, select_columns = c("airport", "waterbody"))
 df <- dummy_cols(df, select_columns = c("airport", "waterbody"), remove_selected_columns = TRUE)
+df$waterbody_lake_and_river <- df$`waterbody_Lake and River`
+df$`waterbody_Lake and River` <- NULL
+summary(df)
+cor(df)
+round(cor(df), 2)
+df <- df[,-12] # Remove Parks
