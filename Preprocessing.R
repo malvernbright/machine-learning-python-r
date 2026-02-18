@@ -51,7 +51,6 @@ df$room_num <- log(1 + df$room_num)
 plot(df$price, df$crime_rate)
 plot(df$price, df$room_num)
 df$avg_dist <- (df$dist1 + df$dist2 + df$dist3 + df$dist4)/4
-View(df)
 
 df2 <- df[, -7:-10]
 df <- df2
