@@ -59,6 +59,9 @@ rm(df3)
 df <- df[,-14]
 
 #df <- dummy_cols(df, select_columns = c("airport", "waterbody"))
+# install fastDummies
+install.packages("fastDummies")
+require("fastDummies")
 df <- dummy_cols(df, select_columns = c("airport", "waterbody"), remove_selected_columns = TRUE)
 df$waterbody_lake_and_river <- df$`waterbody_Lake and River`
 df$`waterbody_Lake and River` <- NULL
