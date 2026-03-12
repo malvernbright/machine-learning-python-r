@@ -60,7 +60,7 @@ df <- df[,-14]
 
 #df <- dummy_cols(df, select_columns = c("airport", "waterbody"))
 # install fastDummies
-install.packages("fastDummies")
+# install.packages("fastDummies")
 require("fastDummies")
 df <- dummy_cols(df, select_columns = c("airport", "waterbody"), remove_selected_columns = TRUE)
 df$waterbody_lake_and_river <- df$`waterbody_Lake and River`
@@ -69,3 +69,10 @@ summary(df)
 cor(df)
 round(cor(df), 2)
 df <- df[,-12] # Remove Parks
+
+# Linear Regression
+simple_model <- lm(price~room_num, data = df)
+summary(simple_model)
+
+plot(df$room_num, df$price)
+abline(simple_model)
