@@ -69,6 +69,8 @@ summary(df)
 cor(df)
 round(cor(df), 2)
 df <- df[,-12] # Remove Parks
+df <- df[, -13]
+df <- df[, -15]
 
 # Linear Regression
 simple_model <- lm(price~room_num, data = df)
@@ -76,3 +78,39 @@ summary(simple_model)
 
 plot(df$room_num, df$price)
 abline(simple_model)
+
+# Multiple Linear Regression
+multiple_model <- lm(price~., data=df)
+summary(multiple_model)
+
+# Test Train Split
+install.packages("caTools")
+require("caTools")
+set.seed(0)
+split <- sample.split(df, SplitRatio = .8)
+training_set <- subset(df, split==TRUE)
+test_set <- subset(df, split==FALSE)
+
+lm_a <- lm(price~.,data=training_set)
+summary(lm_a)
+train_a <- predict(lm_a, training_set)
+test_a <- predict(lm_a, test_set)
+
+mean((training_set$price - train_a)^2)
+mean((test_set$price - test_a)^2)
+
+# Subset Selection
+install.packages("leaps")
+require("leaps")
+
+lm_best <- regsubsets(price~.,data = df, nvmax = 15)
+summary(lm_best)
+summary(lm_best)$adjr2
+which.max(summary(lm_best)$adjr2)
+
+coef(lm_best, 8)
+
+lm_forward <- regsubsets(price~.,data = df, nvmax = 15, method = "forward")
+summary(lm_forward)
+lm_backward <- regsubsets(price~.,data = df, nvmax = 15, method = "backward")
+summary(lm_backward)
