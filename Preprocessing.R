@@ -125,6 +125,7 @@ grid
 
 lm_ridge <- glmnet(x,y,alpha = 0, lambda = grid)
 summary(lm_ridge)
+plot(lm_ridge)
 cv_fit <- cv.glmnet(x,y,alpha=0,lambda=grid)
 plot(cv_fit)
 
