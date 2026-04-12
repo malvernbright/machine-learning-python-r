@@ -142,3 +142,5 @@ lm_lasso <- glmnet(x,y,alpha = 0, lambda = grid)
 y_lasso <- predict(lm_lasso,s=opt_lambda, newx = x)
 rss2 <- sum((y_lasso-y)^2)
 rsq2 <- 1 - rss2/tss
+
+# rm(list = ls())
