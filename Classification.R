@@ -30,4 +30,4 @@ lda.class <- lda.pred$class
 # confusion matrix
 table(lda.class, df$Sold)
 
-sum(lda.pred$posterior)
+sum(lda.pred$posterior[ ,1] > .8)
