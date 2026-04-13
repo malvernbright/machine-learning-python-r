@@ -31,3 +31,19 @@ lda.class <- lda.pred$class
 table(lda.class, df$Sold)
 
 sum(lda.pred$posterior[ ,1] > .8)
+
+
+## Test Train Split
+install.packages("caTools")
+require("caTools")
+
+set.seed(0)
+split <- sample.split(df, SplitRatio = .8)
+train_set <- subset(df, split == TRUE)
+test_set <- subset(df, split == FALSE)
+
+train.fit <- glm(Sold~., data = train_set, family = binomial)
+test.probs <- predict(train.fit, test_set, type = "response")
+test.pred <- rep('NO',120)
+test.pred[test.probs > .5] = "YES"
+table(test.pred,test_set$Sold)
