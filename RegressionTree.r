@@ -28,7 +28,26 @@ regtree <- rpart(formula = Collection~., data = train, control = rpart.control(m
 # Plot the decision tree
 rpart.plot(regtree, box.palette = "RdBu", digits = -3)
 
-# Predict valuebat any point
+# Predict value at any point
 test$pred <- predict(regtree, test, type = "vector")
 
 MSE2 <- mean((test$pred - test$Collection)^2)
+
+
+# Trees
+fulltree <- rpart(formula = Collection~., data = train, control = rpart.control(cp=0))
+rpart.plot(fulltree, box.palette = "RdBu", digits = -3)
+printcp(fulltree)
+plotcp(regtree)
+
+
+mincp <- regtree$cptable[which.min(regtree$cptable[,"xerror"]), "CP"]
+
+prunedtree <- prune(regtree, cp=mincp)
+rpart.plot(prunedtree, box.palette = "RdBu", digits = -3)
+
+test$fulltree <- predict(fulltree, test, type = "vector")
+MSE2 <- mean((test$fulltree - test$Collection)^2)
+
+test$pruned <- predict(prunedtree, test, type = "vector")
+MSE2pruned <- mean((test$pruned - test$Collection)^2)
