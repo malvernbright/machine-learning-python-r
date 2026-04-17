@@ -51,3 +51,29 @@ MSE2 <- mean((test$fulltree - test$Collection)^2)
 
 test$pruned <- predict(prunedtree, test, type = "vector")
 MSE2pruned <- mean((test$pruned - test$Collection)^2)
+
+
+# Bagging
+install.packages("randomForest")
+library(randomForest)
+set.seed(0)
+bagging = randomForest(Collection~., data = train, mtry=17)
+test$bagging <- predict(bagging, testc)
+MSE2bagging <- mean((test$bagging - test$Collection)^2)
+bagging = randomForest(Collection~., data = train, mtry = 7, importance = TRUE)
+which(is.na(bagging))
+
+
+# Random Forest
+randomFor <- randomForest(Collection~., data = train, ntree = 500)
+
+# Predict output
+test$random <- predict(randomFor, test)
+MSE2random <- mean((test$random - test$Collection)^2)
+
+
+# Boosting
+install.packages("gbm")
+library(gbm)
+set.seed(0)
+boosting <- gbm(Collection~., data = train, distribution = "gaussian", n.trees = 5000, interaction.depth = 4, shrinkage = .2, verbose = FALSE)

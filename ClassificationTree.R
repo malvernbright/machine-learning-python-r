@@ -32,3 +32,12 @@ testc$pred <- predict(classtree, testc, type = "class")
 
 table(testc$Start_Tech_Oscar, testc$pred)
 
+# Bagging
+install.packages("randomForest")
+library(randomForest)
+set.seed(0)
+bagging = randomForest(Collection~., data = trainc, mtry=17)
+testc$bagging <- predict(bagging, testc)
+MSE2bagging <- mean((testc$bagging - testc$Collection)^2)
+bagging = randomForest(Collection~., data = trainc, mtry = 7, importance = TRUE)
+which(is.na(bagging))
