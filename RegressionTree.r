@@ -71,9 +71,3 @@ randomFor <- randomForest(Collection~., data = train, ntree = 500)
 test$random <- predict(randomFor, test)
 MSE2random <- mean((test$random - test$Collection)^2)
 
-
-# Boosting
-install.packages("gbm")
-library(gbm)
-set.seed(0)
-boosting <- gbm(Collection~., data = train, distribution = "gaussian", n.trees = 5000, interaction.depth = 4, shrinkage = .2, verbose = FALSE)

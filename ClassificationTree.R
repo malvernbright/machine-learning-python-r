@@ -41,3 +41,20 @@ testc$bagging <- predict(bagging, testc)
 MSE2bagging <- mean((testc$bagging - testc$Collection)^2)
 bagging = randomForest(Collection~., data = trainc, mtry = 7, importance = TRUE)
 which(is.na(bagging))
+
+
+# Ada Boost
+install.packages("adabag")
+library(adabag)
+
+
+trainc$Start_Tech_Oscar1 <- as.factor(trainc$Start_Tech_Oscar)
+
+adaboost <- boosting(Start_Tech_Oscar1~.-Start_Tech_Oscar, data = trainc, boos=TRUE)
+
+predada <- predict(adaboost, testc)
+table(predada$class, testc$Start_Tech_Oscar)
+
+t1 <- adaboost$trees[[1]]
+plot(t1)
+text(t1, pretty = 100)
