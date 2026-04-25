@@ -1,2 +1,10 @@
 *.ipynb_checkpoints
 .Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
+*.Rproj
+*.keras
+*.h5
+*.hdf5
+*.model
