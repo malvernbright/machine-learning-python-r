@@ -90,7 +90,7 @@ history <- model %>% fit(
   validation_steps = 50
 )
 
-model %>% save_model("Prjects/cats_and_dogs_small_2_r.keras")
+model %>% save_model("Projects/cats_and_dogs_small_2_r.keras")
 
 # Displaying curves of loss and accuracy during training
 plot(history)
