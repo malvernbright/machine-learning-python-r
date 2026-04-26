@@ -1,6 +1,5 @@
 # install keras r packages
 # install.packages("keras3")
-library(keras3)
 install.packages("reticulate")
 library(reticulate)
 # Force R to use the one where you actually installed Keras
