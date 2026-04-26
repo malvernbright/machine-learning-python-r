@@ -9,3 +9,4 @@
 *.hdf5
 *.model
 .positai
+*.env/
