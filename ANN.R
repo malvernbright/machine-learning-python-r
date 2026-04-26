@@ -1,9 +1,12 @@
 # install keras r packages
 # install.packages("keras3")
 library(keras3)
-#install_keras()
+install.packages("reticulate")
+library(reticulate)
+# Force R to use the one where you actually installed Keras
+use_virtualenv("r-keras", required = TRUE)
 
-# Load Dataset
+library(keras3)
 fashion_mnist <- dataset_fashion_mnist()
 
 # Test-Train Split using multi-assignment operator

@@ -1,8 +1,11 @@
 ### Install Keras
-#install.packages("keras3")
 library(keras3)
+install.packages("reticulate")
+library(reticulate)
+# Force R to use the one where you actually installed Keras
+use_virtualenv("r-keras", required = TRUE)
 
-# import data
+library(keras3)
 fashion_mnist <- dataset_fashion_mnist()
 
 # Test Train Split
@@ -49,8 +52,8 @@ model <- keras_model_sequential() %>%
     activation = "relu",
     input_shape = c(28, 28, 1) # Note: CNNs expect (width, height, channels)
   ) %>%
-  layer_max_pooling_2d(pool_size = c(2, 2))
-#%>% layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu")
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu")
 
 model <- model %>%
   layer_flatten() %>%
@@ -91,3 +94,4 @@ class_pred[1:20]
 class_names[class_pred[1:20]+1]
 class_names[test_labels[1:20]+1]
 plot(as.raster(test_images[13, , ,]), max = 255)
+
