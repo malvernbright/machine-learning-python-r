@@ -1,8 +1,12 @@
-library(reticulate)
-use_virtualenv("r-keras", required = TRUE)
+# 1. First, tell the system to hide the GPU from TensorFlow
+Sys.setenv(CUDA_VISIBLE_DEVICES = "-1")
 
+# 2. Now load the libraries (they will only see the CPU)
+library(reticulate)
 library(keras3)
-install.packages("tfdatasets")
+library(tensorflow)
+
+#install.packages("tfdatasets")
 library(tfdatasets)
 # Creating the directories
 
@@ -93,5 +97,6 @@ history <- model %>% fit(
 model %>% save_model("Projects/cats_and_dogs_small_2_r.keras")
 
 # Displaying curves of loss and accuracy during training
+png("training_history.png", width = 800, height = 600)
 plot(history)
-
+dev.off()
