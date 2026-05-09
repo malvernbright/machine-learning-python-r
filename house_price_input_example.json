@@ -1,0 +1,12 @@
+{
+  "air_qual": 5.0,
+  "resid_area": 1000.0,
+  "room_num": 3.0,
+  "crime_rate": 0.1,
+  "avg_dist": 5.4,
+  "n_hot_rooms": 1.0,
+  "rainfall": 0.5,
+  "age": 10.0,
+  "airport_1": 0,
+  "waterbody_1": 1
+}

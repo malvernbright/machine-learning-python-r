@@ -1,6 +1,8 @@
 *.ipynb_checkpoints
 .Rproj.user
 *.Rhistory
+**/.Rhistory
+*.RDataTmp
 *.RData
 *.Ruserdata
 *.Rproj
@@ -10,3 +12,5 @@
 *.model
 .positai
 *.env/
+*.pkl
+*.idea/
